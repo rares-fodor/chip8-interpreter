@@ -1,39 +1,18 @@
-# Which compiler will be used.
 CC=gcc
+CFLAGS=-c -Wall -g
 
-# CFLAGS specifies compiler options
-CFLAGS=-c -std=c99 -Wall -Wextra -O2
 
-# Compiler and linker options for SDL2
-SDL_CFLAGS= $(shell sdl2-config --cflags)
-SDL_LFLAGS= $(shell sdl2-config --libs)
+EXEC=chip8
 
-override CFLAGS += $(SDL_CFLAGS)
+all: $(EXEC)
 
-# Directory paths for the Header files and the Source files
-SOURCEDIR= src/
-
-SOURCE_FILES= main.c chip8.c instructions.c
-
-SOURCE_FP = $(addprefix $(SOURCEDIR),$(SOURCE_FILES))
-
-# Create the object files
-OBJECTS =$(SOURCE_FP:.c = .o)
-
-# Program to build
-EXECUTABLE=chip8
-
-# --------------------------------------------
-
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(SDL_LFLAGS) -o $(EXECUTABLE)
+$(EXEC): $(OBJS)
+	$(CC) $(OBJS) $(SDL_LFLAGS) -o $(EXEC)
 
 %.o: %.c 
 	$(CC) $(CFLAGS) -o $@ $< 
 
 clean:
-	rm -rf src/*.o $(EXECUTABLE)
+	rm -rf src/*.o $(EXEC)
 
 
