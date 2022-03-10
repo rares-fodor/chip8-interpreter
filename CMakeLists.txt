@@ -5,6 +5,7 @@ set(SOURCES
     src/main.c
     src/instructions.c
     src/chip8.c
+    src/utils.c
 )
 
 find_package(SDL2 REQUIRED)

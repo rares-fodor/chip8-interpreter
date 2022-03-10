@@ -5,11 +5,7 @@
 #include <time.h>
 
 #include "chip8.h"
-
-void error_handle(const char *message) {
-    perror(message);
-    exit(EXIT_FAILURE);
-}
+#include "utils.h"
 
 void init_chip8(chip8 *chip8) {
     srand(time(NULL));   
